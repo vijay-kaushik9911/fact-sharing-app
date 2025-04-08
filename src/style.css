@@ -1,7 +1,30 @@
+:root {
+  /* Light theme colors */
+  --bg-color: #f5f5f4;
+  --text-color: #292524;
+  --card-bg: #e7e5e4;
+  --input-bg: #d6d3d1;
+  --input-placeholder: #78716c;
+  --accent-color: #3b82f6;
+  --disputed-color: #ef4444;
+}
+
+[data-theme="dark"] {
+  /* Dark theme colors */
+  --bg-color: #292524;
+  --text-color: #fafaf9;
+  --card-bg: #44403c;
+  --input-bg: #78716c;
+  --input-placeholder: #a8a29e;
+  --accent-color: #60a5fa;
+  --disputed-color: #f87171;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  transition: background-color 0.3s, color 0.3s;
 }
 
 html {
@@ -9,8 +32,8 @@ html {
 }
 
 body {
-  background-color: #292524;
-  color: #fafaf9;
+  background-color: var(--bg-color);
+  color: var(--text-color);
   font-family: 'Sono', sans-serif;
   padding: 48px 64px 0;
 }
@@ -44,7 +67,7 @@ section {
 }
 
 .fact-form {
-  background-color: #44403c;
+  background-color: var(--card-bg);
   margin-bottom: 40px;
   padding: 16px 40px;
   display: flex;
@@ -55,7 +78,7 @@ section {
 
 .fact-form input,
 .fact-form select {
-  background-color: #78716c;
+  background-color: var(--input-bg);
   width: 220px;
   border: none;
   border-radius: 100px;
@@ -70,7 +93,7 @@ section {
 }
 
 .fact-form input::placeholder {
-  color: #a8a29e;
+  color: var(--input-placeholder);
 }
 
 .fact-form span {
@@ -110,7 +133,7 @@ h1 {
 .fact {
   font-size: 2rem;
   line-height: 1.4;
-  background-color: #44403c;
+  background-color: var(--card-bg);
   margin-bottom: 16px;
   padding: 16px 30px;
   letter-spacing: -1px;
@@ -173,7 +196,7 @@ ul {
 
 .source:hover,
 .source:active {
-  color: #3b82f6;
+  color: var(--accent-color);
 }
 
 .btn {
@@ -187,6 +210,10 @@ ul {
   border: none;
   border-radius: 100px;
   transition: 0.3s;
+}
+
+.dark-theme-btn {
+  margin-right: 10px;
 }
 
 .btn:hover {
@@ -214,7 +241,7 @@ ul {
 }
 
 .disputed {
-  color: #ef4444;
+  color: var(--disputed-color);
   font-weight: 600;
   margin-right: 10px;
 }

@@ -2,6 +2,8 @@ import userEvent from '@testing-library/user-event';
 import { useEffect, useState } from 'react';
 import supabase from './supabase';
 import './style.css';
+import { ThemeProvider } from './context/ThemeContext';
+import { useTheme } from './context/ThemeContext';
 
 const CATEGORIES = [
   { name: 'technology', color: '#3b82f6' },
@@ -95,8 +97,10 @@ function Loader() {
   return <p className='message'>Loading...</p>;
 }
 
+
 function Header({ showForm, setShowForm }) {
   const appTitle = 'Today I learned!';
+  const { theme, toggleTheme } = useTheme();
 
   return (
     <header className='header'>
@@ -104,11 +108,18 @@ function Header({ showForm, setShowForm }) {
         <img src='logo.png' alt='Today I learned logo' />
         <h1>{appTitle}</h1>
       </div>
-      <button
-        className='btn btn-large btn-open'
-        onClick={() => setShowForm(showForm => !showForm)}>
-        {showForm ? 'close' : 'Share a fact'}
-      </button>
+      <div className='header-controls'>
+        <button
+          className='btn btn-large btn-theme dark-theme-btn'
+          onClick={toggleTheme}>
+          {theme === 'light' ? '🌙' : '☀️'}
+        </button>
+        <button
+          className='btn btn-large btn-open'
+          onClick={() => setShowForm(showForm => !showForm)}>
+          {showForm ? 'close' : 'Share a fact'}
+        </button>
+      </div>
     </header>
   );
 }
@@ -135,9 +146,10 @@ function NewFactForm({ setFacts, setShowForm }) {
     e.preventDefault();
     console.log("the event is",e)
     // 2. Check if data is valid. If so, create a new fact
-    if (!text || !isValidHttpUrl(source) || !category || textLength > 200)
+    if (!text || !isValidHttpUrl(source) || !category || textLength > 200){
       alert("Some fileds may not be filled properly !!!")
-      // return;
+      return;
+    }
 
   
     console.log([category,text,source ])
@@ -149,8 +161,7 @@ function NewFactForm({ setFacts, setShowForm }) {
           text, 
           source, 
           category,
-      
-        }])
+        }]).select();
         
         console.log("submission: ",newFact)
         alert("submitted successfully!!!!")
@@ -167,13 +178,16 @@ function NewFactForm({ setFacts, setShowForm }) {
       }
 
       // Add the new fact to the UI
-      setFacts(facts => [newFact[0], ...facts]);
-      
+      if (newFact && newFact.length > 0) {
+        setFacts(facts => [newFact[0], ...facts]);
+      }
+
       // Reset and close form only on success
       setText('');
       setSource('');
       setCategory('');
       setShowForm(false);
+      
     } catch (err) {
       console.error('Unexpected error:', err);
       alert('An unexpected error occurred');
@@ -320,4 +334,12 @@ function Fact({ fact, setFacts }) {
   );
 }
 
-export default App;
+function AppWithTheme() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
+}
+
+export default AppWithTheme;
