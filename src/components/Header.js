@@ -13,7 +13,7 @@ export default function Header({ showForm, setShowForm, showStats, setShowStats 
       <div className='header-controls'>
         <button
           className='btn btn-large btn-stats'
-          onClick={() => setShowStats(!showStats)}
+          onClick={(e) => setShowStats(e)}
           title={showStats ? 'Hide stats' : 'Show stats'}
         >
           📊

@@ -9,6 +9,7 @@ import CategoryFilter from './components/CategoryFilter';
 import FactList from './components/FactList';
 import StatsPanel from './components/StatsPanel';
 import Loader from './components/Loader';
+import { CATEGORIES } from './constants';
 
 function App() {
   const [showForm, setShowForm] = useState(false);
@@ -87,7 +88,7 @@ function App() {
                     }}
                     transition={{ duration: 0.3, ease: "easeOut" }}
                   >
-                    <StatsPanel facts={facts} />
+                    <StatsPanel facts={facts} categories={CATEGORIES}/>
                   </motion.div>
                 </>
               )}
