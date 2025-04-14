@@ -1,6 +1,6 @@
 import { useTheme } from '../context/ThemeContext';
 
-export default function Header({ showForm, setShowForm, showStats, setShowStats }) {
+export default function Header({ showForm, setShowForm, showStats, setShowStats, fetchRandomFact }) {
   const appTitle = 'Today I learned!';
   const { theme, toggleTheme } = useTheme();
 
@@ -29,6 +29,13 @@ export default function Header({ showForm, setShowForm, showStats, setShowStats 
           className='btn btn-large btn-open'
           onClick={() => setShowForm(showForm => !showForm)}>
           {showForm ? 'close' : 'Share a fact'}
+        </button>
+        <button
+          className='btn btn-large btn-open'
+          onClick={fetchRandomFact}
+          title='Get a random fact'
+        >
+          Random Fact
         </button>
       </div>
     </header>

@@ -7,6 +7,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
+    "axios": "^1.8.4",
     "chart.js": "^4.4.8",
     "dotenv": "^16.0.3",
     "framer-motion": "^12.6.3",
@@ -39,5 +40,15 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "assert": "^2.1.0",
+    "browserify-zlib": "^0.2.0",
+    "crypto-browserify": "^3.12.1",
+    "https-browserify": "^1.0.0",
+    "stream-browserify": "^3.0.0",
+    "stream-http": "^3.2.0",
+    "url": "^0.11.4",
+    "util": "^0.12.5"
   }
 }

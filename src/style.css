@@ -402,3 +402,28 @@ ul {
     flex-direction: column;
   }
 }
+
+/* New styles for random fact button and display */
+.btn-random {
+  background-color: #3b82f6; /* Blue color */
+  color: white;
+  margin-left: 10px; /* Space between buttons */
+  padding: 10px 20px; /* Padding for the button */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+  transition: background-color 0.2s; /* Smooth transition */
+}
+
+.btn-random:hover {
+  background-color: #2563eb; /* Darker blue on hover */
+}
+
+.random-fact-container {
+  background-color: #f3f4f6; /* Light background for the fact display */
+  padding: 15px; /* Padding for the container */
+  border-radius: 5px; /* Rounded corners */
+  margin-top: 20px; /* Space above the fact display */
+  font-size: 18px; /* Font size for the fact text */
+  color: #333; /* Dark text color */
+}

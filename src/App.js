@@ -10,6 +10,8 @@ import FactList from './components/FactList';
 import StatsPanel from './components/StatsPanel';
 import Loader from './components/Loader';
 import { CATEGORIES } from './constants';
+import axios from 'axios';
+
 
 function App() {
   const [showForm, setShowForm] = useState(false);
@@ -18,6 +20,7 @@ function App() {
   const [currentCategory, setCurrentCategory] = useState('all');
   const [showStats, setShowStats] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({x: 0, y: 0});
+  const [randomFact, setRandomFact] = useState(null);
 
   const handleStatsToggle = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -47,14 +50,25 @@ function App() {
     getFacts();
   }, [currentCategory]);
 
+  const fetchRandomFact = async () => {
+    try {
+      const response = await axios.get('https://uselessfacts.jsph.pl/random.json?language=en');
+      setRandomFact(response.data.text);
+    } catch (error) {
+      console.error('Error fetching random fact:', error);
+      setRandomFact("Couldn't fetch a random fact. Please try again.");
+    }
+  };
+
   return (
     <>
-      <Header 
-        showForm={showForm} 
-        setShowForm={setShowForm}
-        showStats={showStats}
-        setShowStats={handleStatsToggle}
-      />
+        <Header 
+          showForm={showForm} 
+          setShowForm={setShowForm}
+          showStats={showStats}
+          setShowStats={handleStatsToggle}
+          fetchRandomFact={fetchRandomFact}
+        />
       {showForm && <NewFactForm setFacts={setFacts} setShowForm={setShowForm} />}
       
       <main className='main'>
@@ -63,6 +77,12 @@ function App() {
         {isLoading ? <Loader /> : (
           <>
             <FactList facts={facts} setFacts={setFacts} />
+            {randomFact && (
+              <div className="random-fact-container">
+                <h3>Random Fact:</h3>
+                <p>{randomFact}</p>
+              </div>
+            )}
             <AnimatePresence>
               {showStats && (
                 <>
