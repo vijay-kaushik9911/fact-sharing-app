@@ -81,7 +81,7 @@ function App() {
         {isLoading ? <Loader /> : (
           <>
             <FactList facts={facts} setFacts={setFacts} />
-
+          
             <AnimatePresence>
               {showStats && (
                 <>
