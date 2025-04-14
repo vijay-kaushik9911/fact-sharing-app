@@ -10,6 +10,7 @@ import FactList from './components/FactList';
 import StatsPanel from './components/StatsPanel';
 import Loader from './components/Loader';
 import { CATEGORIES } from './constants';
+import RandomFact from './components/RandomFact';
 import axios from 'axios';
 
 
@@ -21,6 +22,7 @@ function App() {
   const [showStats, setShowStats] = useState(false);
   const [buttonPosition, setButtonPosition] = useState({x: 0, y: 0});
   const [randomFact, setRandomFact] = useState(null);
+  const [showRandomFact, setShowRandomFact] = useState(false);
 
   const handleStatsToggle = (e) => {
     const rect = e.currentTarget.getBoundingClientRect();
@@ -54,6 +56,7 @@ function App() {
     try {
       const response = await axios.get('https://uselessfacts.jsph.pl/random.json?language=en');
       setRandomFact(response.data.text);
+      setShowRandomFact(true);
     } catch (error) {
       console.error('Error fetching random fact:', error);
       setRandomFact("Couldn't fetch a random fact. Please try again.");
@@ -70,19 +73,15 @@ function App() {
           fetchRandomFact={fetchRandomFact}
         />
       {showForm && <NewFactForm setFacts={setFacts} setShowForm={setShowForm} />}
-      
+      {showRandomFact && <RandomFact randomFact={randomFact} onClose={() => setShowRandomFact(false)} />}
+
       <main className='main'>
         <CategoryFilter setCurrentCategory={setCurrentCategory} />
         
         {isLoading ? <Loader /> : (
           <>
             <FactList facts={facts} setFacts={setFacts} />
-            {randomFact && (
-              <div className="random-fact-container">
-                <h3>Random Fact:</h3>
-                <p>{randomFact}</p>
-              </div>
-            )}
+
             <AnimatePresence>
               {showStats && (
                 <>
