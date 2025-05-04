@@ -1,7 +1,7 @@
 import { useTheme } from '../context/ThemeContext';
 
 export default function Header({ showForm, setShowForm, showStats, setShowStats, fetchRandomFact }) {
-  const appTitle = 'Today I learned!';
+  const appTitle = 'Did you know ?';
   const { theme, toggleTheme } = useTheme();
 
   return (
