@@ -18,6 +18,18 @@ export default function Fact({ fact, setFacts, isUpdating, setIsUpdating }) {
     }
   }
 
+  function speak(text){
+    const speech = new SpeechSynthesisUtterance(text);
+    speech.lang = 'en-US';
+    speech.rate = 1.0;
+    speech.pitch = 1.0;
+    speech.volume = 1.0;
+    window.speechSynthesis.speak(speech);
+    
+  } 
+
+  
+
   return (
     <li className='fact'>
       <p>

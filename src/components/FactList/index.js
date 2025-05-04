@@ -1,7 +1,5 @@
 import { useState } from 'react';
-import supabase from '../../supabase';
 import Fact from './Fact';
-import { CATEGORIES } from '../../constants';
 
 export default function FactList({ facts, setFacts }) {
   const [isUpdating, setIsUpdating] = useState(false);
