@@ -55,7 +55,8 @@ export default function Fact({ fact, setFacts, isUpdating, setIsUpdating }) {
         <button onClick={() => handleVote('votesFalse')} disabled={isUpdating}>
           {fact.votesFalse} ⛔️
         </button>
-      </div>
+        <button onClick={() => speak(fact.text)}>🔊</button>
+        </div>
     </li>
   );
 }
